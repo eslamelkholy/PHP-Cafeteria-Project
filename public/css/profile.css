@@ -1,0 +1,83 @@
+body{
+    background-color: mintcream;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+.container{
+    margin-top: 50px;
+}
+h1{
+    color: lightseagreen;
+    margin-top: -30px;
+    margin-left: -150px;
+}
+.row{
+    margin-top: 40px;
+}
+.post{
+    background-color: #EEE;
+    height: 450px;
+    border-radius: 10px;
+    border: 2px solid lightgray;
+}
+.postPublisher{
+    margin-top: 5px;
+    height: 20%;
+}
+.postContent{
+    height: 20%;
+
+}
+.comment{
+    height: 140px;
+}
+.postImg{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    float: left;
+}
+.commentImg{
+    margin-top: 2px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    float: left;
+}
+h4{
+    margin-left: 10px;
+    margin-top: 25px;
+    float: left;
+}
+.usernameComment{
+    margin-left: 45px;
+}
+.submitComment{
+    margin-top: -10px;
+}
+.btnControllers{
+    float:right;
+}
+.commentContent{
+    font-size: 14px;
+    margin-left: 45px;
+}
+.userCommentsContainer{
+    border:1px solid lightgray;
+    border-radius: 5px;
+    height: 20%;
+}
+.commentEdit{
+    margin-top: 2px;
+    font-size: 13px;
+    text-align: left;
+    width: 120px;
+    margin-right: 10px;
+    float:right;
+}
+.seeMoreBtn{
+    float: right;
+   
+}
