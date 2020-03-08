@@ -10,7 +10,7 @@
   <title>Home</title>
 </head>
 
-<body class="">
+<body>
   <?php include './userNavbar.php' ?>
   <main class="add-user">
     <section class="main-padding" style="text-align: right;">
@@ -21,11 +21,10 @@
         </form>
       </div>
     </section>
-    <div class="row">
+    <div class="row" style="width: 100%;">
       
-      <section  class="col-4">
-        <div class="container"
-          style=" text-align: left; border: 1px black solid; width: 500px; margin-left:10px">
+      <section  class=" col-4" style="margin-left: 20px">
+        <div style=" border: 1px black solid;">
           <h1 style="text-align:center;">Order</h1>
           <form action="#" method="POST" class="form-horizontal text-info">
             <div class="form-group row">
@@ -71,7 +70,7 @@
 
             <hr class="divider" >
 
-            <div style="text-align:right;">
+            <div style="text-align:right;margin-right:20px">
               <h3>EGP 45 </h3>
             </div>
             <br />
