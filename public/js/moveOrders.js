@@ -36,25 +36,36 @@ function sumTotalPrice() {
 
 //Show Order Info
 function showOrder(orderId,obj)
-{
-    $.ajax({
-        url:"http://localhost/CafeteriaProject/Controller/orderController.php",
-        method:"post",
-        dataType:"json",
-        data : {orderId : orderId},
-        success:function(allProduct){
-            $.each(allProduct,function(index,product){
-                var html = '<div class="images">'+
-                    '<img src="../public/Images/'+product.product_picture+'">'+
-                    '<span class="badge badge-pill badge-primary">'+product.price+' EGP</span>'+
-                    '<figcaption>'+product.name+'</figcaption>'+
-                    '<figcaption>'+product.quantity+'</figcaption>'+
-                '</div>';
-                $(".orderImages").append(html);
-            });
-        },
-        error:function(error){
-            console.log(error);
-        }
-    })
+{   
+    $(obj).toggleClass("btn-danger");
+    if($(obj).text() == "+")
+    {
+        $(obj).text('-');
+        $.ajax({
+            url:"http://localhost/CafeteriaProject/Controller/orderController.php",
+            method:"post",
+            dataType:"json",
+            data : {orderId : orderId},
+            success:function(allProduct){
+                $.each(allProduct,function(index,product){
+                    var html = '<div class="images">'+
+                        '<img src="../public/Images/'+product.product_picture+'">'+
+                        '<span class="badge badge-pill badge-primary">'+product.price+' EGP</span>'+
+                        '<figcaption>'+product.name+'</figcaption>'+
+                        '<figcaption>'+product.quantity+'</figcaption>'+
+                    '</div>';
+                    $(".orderImages").append(html);
+                });
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+    else
+    {
+        $(obj).text('+');
+        $(".orderImages").empty();
+    }
+    
 }

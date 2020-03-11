@@ -79,7 +79,7 @@
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>
                             <th><?php echo $row['order_date']; ?>
-                                <a class="btn btn-primary showOrder" onclick="showOrder(<?php echo $row['id']; ?>,this)"> + </a>
+                                <a class="btn btn-primary showOrder" onclick="showOrder(<?php echo $row['id']; ?>,this)">+</a>
                             </th>
                             <td>
                                 <?php 
@@ -111,9 +111,7 @@
             <div class="orderImages">
                 
             </div>
-
         </div>
-
     </div>
     <script src="../public/js/JQuery-3.3.1.min.js"></script>
     <script src="../public/js/popper.js"></script>
