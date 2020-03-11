@@ -61,7 +61,10 @@ class Order
     //List User Orders ON Specified Data
     public function listDatedOrders($from,$to)
     {
-        
+        global $db;
+        $userId = mysqli_escape_string($db,$this->userId);
+        $result = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = '$userId' and order_date BETWEEN '$from' AND '$to'");
+        return ($result)? $result : false;
     }
     //List All Order Info And It's Related 
     public function listAllOrder_Related_Info()
