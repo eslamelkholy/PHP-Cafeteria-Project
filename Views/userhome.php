@@ -25,7 +25,7 @@
       
       <section  class="col-4">
         <div class="container"
-          style=" text-align: left; border: 1px black solid; width: 500px; margin-left:10px">
+          style=" text-align: left; border: 1px black solid;  margin-left:10px">
           <h1 style="text-align:center;">Order</h1>
           <form action="#" method="POST" class="form-horizontal text-info">
             <div class="form-group row">

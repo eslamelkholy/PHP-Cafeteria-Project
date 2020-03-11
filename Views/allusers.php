@@ -1,3 +1,5 @@
+
+
 <html>
 
 <head>
@@ -29,45 +31,26 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
+                <?php 
+    require_once '..' . DIRECTORY_SEPARATOR . 'config.php';
+    $user = new User();
+    $userList = $user->listUsers();
+    while($row = mysqli_fetch_assoc($userList)){
+        echo "
                     <tr>
-                        <th>Nasr</th>
-                        <td>2005</td>
-                        <td><img src="../public/Images/login5.jpg" width="50px" height="50px" alt="Admin Picture">
+                        <th>{$row['name']}</th>
+                        <td>{$row['room_no']}</td>
+                        <td><img src='../public/Images/{$row['profile_picture']}' width='50px' height='50px' alt='Admin Picture'>
                         </td>
-                        <td>5605</td>
-                        <td><a href="#" class="btn btn-success btn-sm">Edit</a></td>
-                        <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <th>Ayman</th>
-                        <td>2005</td>
-                        <td><img src="../public/Images/login5.jpg" width="50px" height="50px" alt="Admin Picture">
-                        </td>
-                        <td>5605</td>
-                        <td><a href="#" class="btn btn-success btn-sm">Edit</a></td>
-                        <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <th>Hend</th>
-                        <td>2010</td>
-                        <td><img src="../public/Images/login5.jpg" width="50px" height="50px" alt="Admin Picture">
-                        </td>
-                        <td>5605</td>
-                        <td><a href="#" class="btn btn-success btn-sm">Edit</a></td>
-                        <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <th>Noha</th>
-                        <td>2010</td>
-                        <td><img src="../public/Images/login5.jpg" width="50px" height="50px" alt="Admin Picture">
-                        </td>
-                        <td>5605</td>
-                        <td><a href="#" class="btn btn-success btn-sm">Edit</a></td>
-                        <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
-                    </tr>
+                        <td>{$row['ext']}</td>
+                        <td><a href='editUser.php?editId={$row['id']}' class='btn btn-success btn-sm'>Edit</a></td>
+                        <td><a href='../controller/userController.php?DeleteId={$row['id']}' class='btn btn-danger btn-sm'>Delete</a></td>
+                    </tr>";
+                }
+                ?>
                 </tbody>
             </table>
-            <a href="#" class="btn btn-success btn-lg col-12">Add User</a>
+            <a href="addUser.php " class="btn btn-success btn-lg offset-5 col-2">Add User</a>
         </div>
 
     </div>
