@@ -63,6 +63,14 @@ class Order
     {
         
     }
+    //List All Order Info And It's Related 
+    public function listAllOrder_Related_Info()
+    {
+        global $db;
+        $orderId = $this->id;
+        $result = mysqli_query($db,"SELECT * FROM order_products INNER JOIN products ON product_id = id HAVING order_id = '$orderId'");
+        return ($result) ? $result : false;
+    }
     //Add Order To it's Related Product Table
     public static function addRelated_Order_Product($orderId,$productId,$quantity)
     {

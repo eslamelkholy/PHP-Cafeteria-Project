@@ -21,6 +21,22 @@
             }
         }
     }    
-
-
+    //Response Will all Specified Order Info
+    elseif(isset($_POST["orderId"]))
+    {
+        $orderInfo = new Order();
+        $orderInfo->setOrderId($_POST['orderId']);
+        $result = $orderInfo->listAllOrder_Related_Info();
+        $allProduct = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $product = array(
+                "quantity" => $row["quantity"],
+                "name" => $row['name'],
+                "price" => $row['price'],
+                "product_picture" => $row['product_picture']
+            );
+            $allProduct[] = $product;
+        }
+        echo json_encode($allProduct);
+    }
 ?>

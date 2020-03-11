@@ -9,6 +9,35 @@
             margin-left: 20px;
             margin-top: -10px
         }
+        .showOrder{
+            height: 30px;
+            font-weight: bold;
+            float: right;
+            margin-left: -20px;
+            padding-top: -20px;   
+        }
+        img{
+            width: 100px;
+            height: 100px;
+        }
+        .row{
+            text-align: center;
+        }
+        .orderImages{
+            text-align: center;
+            border: 2px solid black;
+            width: 100%;
+            margin-top: 50px;
+            
+        }
+        .images{
+            margin-left: 40px;
+            display: inline-block;
+        }
+        figcaption{
+            font-size: 18px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -49,19 +78,27 @@
                     $result = $userOrder->listOrders();
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>
-                            <th><?php echo $row['order_date']; ?></th>
+                            <th><?php echo $row['order_date']; ?>
+                                <a class="btn btn-primary showOrder" onclick="showOrder(<?php echo $row['id']; ?>,this)"> + </a>
+                            </th>
                             <td>
                                 <?php 
                                     echo ($row['status'] == "1" ) ? "Processing " : (($row['status'] == "2") ? "Out Of Deliver" : "Done"); 
                                 ?>
                             </td>
                             <td><?php echo $row['amount']; ?></td>
-                            <td><a href="#" class="btn btn-success btn-sm">Cancel</a></td>
-                            
+                            <td>
+                                <?php 
+                                    if(($row['status'] == "1" )){ ?>
+                                        <a href="#" class="btn btn-success btn-sm">Cancel Order</a>
+                                <?php }?>
+                            </td>
                         </tr>
                 <?php } ?>
                 
-                <?php }else if(isset($_POST["showOrders"])){
+                <?php }
+                    //List Order within Days
+                    else if(isset($_POST["showOrders"])){
                         echo "POST REQUEST";
                         
                 ?>
@@ -70,10 +107,18 @@
                 </tbody>
             </table>
         </div>
+        <div class="row text-center">
+            <div class="orderImages">
+                
+            </div>
+
+        </div>
 
     </div>
-
-
+    <script src="../public/js/JQuery-3.3.1.min.js"></script>
+    <script src="../public/js/popper.js"></script>
+    <script src="../public/js/bootstrap.js"></script>
+    <script src="../public/js/moveOrders.js"></script>
 </body>
 
 </html>
