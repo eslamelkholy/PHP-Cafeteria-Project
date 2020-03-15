@@ -139,7 +139,7 @@ class User
 
     }
 
-}
+
 
     //--------- Add User >> Register User -------------
     public function addUser()
