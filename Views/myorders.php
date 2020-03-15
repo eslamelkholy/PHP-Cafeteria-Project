@@ -1,44 +1,11 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>My Orders</title>
     <?php require_once '../config.php'; ?>
     <link href="../public/css/bootstrap.css" rel="stylesheet" />
     <link href="../public/css/font-awesome.css" rel="stylesheet" />
-    <style>
-        #listOrder{
-            margin-left: 20px;
-            margin-top: -10px
-        }
-        .showOrder{
-            height: 30px;
-            font-weight: bold;
-            float: right;
-            margin-left: -20px;
-            padding-top: -20px;   
-        }
-        img{
-            width: 100px;
-            height: 100px;
-        }
-        .row{
-            text-align: center;
-        }
-        .orderImages{
-            text-align: center;
-            border: 2px solid black;
-            width: 100%;
-            margin-top: 50px;
-            
-        }
-        .images{
-            margin-left: 40px;
-            display: inline-block;
-        }
-        figcaption{
-            font-size: 18px;
-            font-weight: bold;
-        }
-    </style>
+    <link href="../public/css/userOrders.css" rel="stylesheet" />
 </head>
 <body>
     <!------------- Navbar ------------->

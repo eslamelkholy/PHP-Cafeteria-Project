@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Order
 {
@@ -37,16 +37,16 @@ class Order
     public function addOrder()
     {
         global $db;
-        $notes = mysqli_escape_string($db,$this->notes);
-        $totalPrice = mysqli_escape_string($db,$this->totalPrice);
-        $room_no = mysqli_escape_string($db,$this->room_no);
-        $userId = mysqli_escape_string($db,$this->userId);
-        $result = mysqli_query($db,"INSERT INTO orders SET `notes` = '$notes' ,
+        $notes = mysqli_escape_string($db, $this->notes);
+        $totalPrice = mysqli_escape_string($db, $this->totalPrice);
+        $room_no = mysqli_escape_string($db, $this->room_no);
+        $userId = mysqli_escape_string($db, $this->userId);
+        $result = mysqli_query($db, "INSERT INTO orders SET `notes` = '$notes' ,
             order_date = now(),
             `status` = 1 ,
-             `amount` = '$totalPrice',
-             `room` = '$room_no',
-             `user_id` = '$userId'
+            `amount` = '$totalPrice',
+            `room` = '$room_no',
+            `user_id` = '$userId'
         ");
         return mysqli_insert_id($db);
     }
@@ -54,13 +54,15 @@ class Order
     public function listOrders()
     {
         global $db;
-        $userId = mysqli_escape_string($db,$this->userId);
-        $result = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = '$userId'");
-        return ($result)? $result : false;
+        $userId = mysqli_escape_string($db, $this->userId);
+        $result = mysqli_query($db, "SELECT * FROM orders WHERE `user_id` = '$userId'");
+        return ($result) ? $result : false;
     }
     //List User Orders ON Specified Data
-    public function listDatedOrders($from,$to)
+    public function listDatedOrders($from, $to)
     {
+<<<<<<< HEAD
+=======
         global $db;
         $userId = mysqli_escape_string($db,$this->userId);
         $result = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = '$userId' and order_date BETWEEN '$from' AND '$to'");
@@ -73,23 +75,32 @@ class Order
         $orderId = $this->id;
         $result = mysqli_query($db,"SELECT * FROM order_products INNER JOIN products ON product_id = id HAVING order_id = '$orderId'");
         return ($result) ? $result : false;
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
     }
     //Add Order To it's Related Product Table
-    public static function addRelated_Order_Product($orderId,$productId,$quantity)
+    public static function addRelated_Order_Product($orderId, $productId, $quantity)
     {
         global $db;
-        $result = mysqli_query($db,"INSERT INTO order_products SET order_id = '$orderId' ,
+        $result = mysqli_query($db, "INSERT INTO order_products SET order_id = '$orderId' ,
             product_id = '$productId',
             quantity = '$quantity'
         ");
         return ($result) ? true : false;
     }
-    //List Latest Five Orders
-    public static function getLatestOrders()
+    //Get Last Order
+    public static function getLastOrderData()
     {
         global $db;
-        $result = mysqli_query($db,"SELECT name FROM orders INNER JOIN users ON orders.user_id = users.id LIMIT 5");
+<<<<<<< HEAD
+        $result = mysqli_query($db, "select name FROM orders INNER JOIN users ON orders.user_id = users.id LIMIT 5");
         return $result;
+=======
+        $myOrder = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = 1 ORDER BY id DESC LIMIT 1");
+        $myOrderData = mysqli_fetch_assoc($myOrder);
+        $orderId = $myOrderData['id'];
+        $result = mysqli_query($db,"SELECT * FROM order_products INNER JOIN products ON product_id = id HAVING order_id = '$orderId'");
+        return ($result) ? $result : false;
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
     }
 
     public function listOrderOfUser(){
@@ -105,4 +116,3 @@ class Order
     //     $result = mysqli_query($db,"select * from products inner join order_product on products.id = order_product.product_id where order_product.order_id =$orserId")
     // }
 }
-?>

@@ -1,6 +1,7 @@
 <?php require_once '..' . DIRECTORY_SEPARATOR . 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,17 @@
   <link rel="stylesheet" href="../public/css/bootstrap.min.css" />
   <link type="text/css" rel="stylesheet" media="screen" href="../public/css/styles.css" />
   <title>Home</title>
+<<<<<<< HEAD
   <style>
-    .btn-info{
+    .btn-info {
       text-align: center;
       font-weight: bold;
       font-size: 18px;
-      
+
     }
   </style>
+=======
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
 </head>
 
 <body>
@@ -29,20 +33,26 @@
         </form>
       </div>
     </section>
+    <h3 style="margin-left: 20px;font-size: 24px;color: #17a2b8">Click On The Products Below To Order Now..</h3>
     <div class="row" style="width: 100%;">
-      
+<<<<<<< HEAD
+
+      <section class=" col-4" style="margin-left: 20px">
+        <div style=" border: 1px black solid;">
+=======
       <section  class=" col-4" style="margin-left: 20px">
-        <div style=" border: 1px black solid;" >
+        <div style="border:2px solid lightgray;border-radius: 5px;" >
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
           <h1 style="text-align:center;">Order</h1>
           <form action="../Controller/orderController.php" method="POST" class="form-horizontal text-info">
             <!-- Clicked Orders Section -->
             <div id="SelectedOrdersContainers">
-              <div class="form-group row" >
-                <label for="" class="offset-sm-1 col-sm-2 control-label" >Cafee</label>
-                <div class="col-sm-6">
-                  <input class="form-control onRuntime" name="Cafee" type="number" placeholder="0" value="0" min="0" max="10"style="width: 100px;" />
-                  <div style="text-align: right;margin-top:-35px">
-                    EGP  <span id="total" class="col-2 quantityTotalPrice"> 0 </span>
+              <div class="form-group row">
+                <label for="" class="offset-sm-1 col-sm-2 control-label">Cafee</label>
+                <div class="col-sm-5">
+                  <input class="form-control onRuntime" name="Cafee" type="number" placeholder="0" value="0" min="0" max="10" style="width: 100px;" />
+                  <div style="text-align: right;margin-top:-30px">
+                    EGP <span id="total" class="col-2 quantityTotalPrice"> 0 </span>
                     (<span id="cancel">10</span>)
                   </div>
                 </div>
@@ -51,9 +61,8 @@
             <!-- Notes Section -->
             <div class="form-group row">
               <label for="" class="offset-sm-1 col-sm-2 control-label">Notes</label>
-              <div class="col-sm-6">
-                <input class="form-control" name="Notes" type="text" placeholder="Enter your notes about the order"
-                  style="width: 300px; height: 100px;" />
+              <div class="col-sm-10 offset-1">
+                <input class="form-control" name="Notes" type="text" placeholder="Enter your notes about the order" style="width: 300px; height: 100px;" />
               </div>
             </div>
             <div class="form-group row">
@@ -68,10 +77,10 @@
                 </select>
               </div>
             </div>
-            <hr class="divider" >
+            <hr class="divider">
             <div style="text-align:right;margin-right:20px">
-            <!-- Total Price -->
-              <h3>EGP  <input class="col-2 btn btn-info" type="text" value="0" name="totalPrice" readonly /> </h3>
+              <!-- Total Price -->
+              <h3>EGP <input class="col-2 btn btn-info" type="text" value="0" name="totalPrice" readonly /> </h3>
             </div>
             <br />
             <div class="form-group text-center">
@@ -81,29 +90,47 @@
         </div>
       </section>
 
-      <section  class="offset-1 col-6" style="text-align: center; border: 1px black solid;">
+<<<<<<< HEAD
+      <section class="offset-1 col-6" style="text-align: center; border: 1px black solid;">
         <h1>Latest Orders</h1>
         <!-- Latest Five Orders !!! -->
         <?php $result = Order::getLatestOrders();
+        while ($row = mysqli_fetch_assoc($result)) { ?>
+          <div style="display: inline-block; margin: 10px;">
+            <img src="../public/Images/order.png" width="100px" height="100px" />
+            <figcaption><?php echo $_SESSION['username']; ?></figcaption>
+          </div>
+        <?php } ?>
+=======
+      <section  class="offset-1 col-6" style="border:2px solid lightgray;border-radius: 5px;text-align: center">
+        <h1>Last Order</h1>
+        <!-- Last Orders !!! -->
+        <?php $result = Order::getLastOrderData();
+          if(!$result || mysqli_num_rows($result) > 0)
+          {
             while ($row = mysqli_fetch_assoc($result)) { ?>
             <div style="display: inline-block; margin: 10px;">
-              <img src="../public/Images/order.png" width="100px" height="100px" />
+              <img src="../public/Images/<?php echo $row['product_picture']; ?>" width="100px" height="100px" />
               <figcaption><?php echo $row['name']; ?></figcaption>
+              <figcaption class="quantity"><?php echo $row['quantity'] ?></figcaption>
             </div>
-        <?php }?>
+        <?php }}else{ ?>
+              <h3>Make Your First Order Now !!</h3>
+       <?php } ?>
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
         <hr class="divider">
         <div style="display: inline-block; margin: 10px;">
-        <?php 
+          <?php
           //List All Products
           $product = new Products();
           $result = $product->listAllProducts();
           while ($row = mysqli_fetch_assoc($result)) { ?>
             <div style="display: inline-block; margin: 10px;">
-              <img class="orders" src="../public/Images/<?php echo $row['product_picture']; ?>" width="100px" height="100px"  />
+              <img class="orders" src="../public/Images/<?php echo $row['product_picture']; ?>" width="100px" height="100px" />
               <span class="badge badge-pill badge-primary"><?php echo $row['price']; ?> EGP</span>
               <figcaption><?php echo $row['name'] ?></figcaption>
             </div>
-        <?php }?>
+          <?php } ?>
         </div>
       </section>
     </div>
