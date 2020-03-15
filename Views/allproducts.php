@@ -1,6 +1,6 @@
 <?php
 require_once '..' . DIRECTORY_SEPARATOR . 'config.php';
-include '../Controller/productController.php' ?>
+include '../Controller/Products.php' ?>
 
 <html>
 
@@ -42,10 +42,10 @@ include '../Controller/productController.php' ?>
                     $result = $product->listAllProducts();
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>
-                            <th><?php echo $row['product_name']; ?></th>
-                            <td><?php echo $row['product_price']; ?> EGP</td>
+                            <th><?php echo $row['name']; ?></th>
+                            <td><?php echo $row['price']; ?> EGP</td>
                             <td align="center">
-                            <?php echo"<img src='../uploads/{$row['product_image'] }' style='width:50px;height:50px'; ";?></td>
+                            <?php echo"<img src='../uploads/{$row['product_picture'] }' style='width:50px;height:50px'; ";?></td>
                             <td><a href="editProducts_form.php?id=<?php echo $row["id"] ?>" class="btn btn-success btn-sm">Edit</a></td>
                             <td><a href="allproducts.php?delete=<?= $row['id']; ?>" class="btn btn-danger btn-sm">Delete</a></td>
                         </tr>

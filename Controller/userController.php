@@ -21,23 +21,23 @@
             $typeAllaw = array("jpg","jpeg","png","JPG","IPEG","PNG");
             if(in_array($imageType,$typeAllaw)){
             move_uploaded_file($dir_tmp,$imagePath);
-
+           
         $user->setUserPic($_POST['profileImg']);
 
         if($user->updateUser()){
              header("Location: ../views/allusers.php");
         }
-
     }
-    //Delete user
-    else if(isset($_GET['DeleteId'])){
-       $result = $user->deleteUser($_GET['DeleteId']);
-       if($result){
-           header("Location: ../Views/allusers.php");
-       }
-       else{
-           echo "error";
-       }
+}
+}
+//Delete user
+else if (isset($_GET['DeleteId'])) {
+    $result = $user->deleteUser($_GET['DeleteId']);
+    if ($result) {
+        header("Location: ../Views/allusers.php");
+    } else {
+        echo "error";
     }
+}
 
 ?>
