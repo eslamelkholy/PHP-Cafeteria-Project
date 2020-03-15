@@ -8,19 +8,6 @@
   <link rel="stylesheet" href="../public/css/bootstrap.min.css" />
   <link type="text/css" rel="stylesheet" media="screen" href="../public/css/styles.css" />
   <title>Home</title>
-  <style>
-    .btn-info{
-      text-align: center;
-      font-weight: bold;
-      font-size: 18px;
-      
-    }
-    .quantity{
-      font-weight: bold;
-      color: #17a2b8;
-      font-size: 24px;
-    }
-  </style>
 </head>
 
 <body>
@@ -90,13 +77,17 @@
         <h1>Last Order</h1>
         <!-- Last Orders !!! -->
         <?php $result = Order::getLastOrderData();
+          if(!$result || mysqli_num_rows($result) > 0)
+          {
             while ($row = mysqli_fetch_assoc($result)) { ?>
             <div style="display: inline-block; margin: 10px;">
               <img src="../public/Images/<?php echo $row['product_picture']; ?>" width="100px" height="100px" />
               <figcaption><?php echo $row['name']; ?></figcaption>
               <figcaption class="quantity"><?php echo $row['quantity'] ?></figcaption>
             </div>
-        <?php }?>
+        <?php }}else{ ?>
+              <h3>Make Your First Order Now !!</h3>
+       <?php } ?>
         <hr class="divider">
         <div style="display: inline-block; margin: 10px;">
         <?php 
