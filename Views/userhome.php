@@ -15,6 +15,11 @@
       font-size: 18px;
       
     }
+    .quantity{
+      font-weight: bold;
+      color: #17a2b8;
+      font-size: 24px;
+    }
   </style>
 </head>
 
@@ -82,13 +87,14 @@
       </section>
 
       <section  class="offset-1 col-6" style="text-align: center; border: 1px black solid;">
-        <h1>Latest Orders</h1>
-        <!-- Latest Five Orders !!! -->
-        <?php $result = Order::getLatestOrders();
+        <h1>Last Order</h1>
+        <!-- Last Orders !!! -->
+        <?php $result = Order::getLastOrderData();
             while ($row = mysqli_fetch_assoc($result)) { ?>
             <div style="display: inline-block; margin: 10px;">
-              <img src="../public/Images/order.png" width="100px" height="100px" />
+              <img src="../public/Images/<?php echo $row['product_picture']; ?>" width="100px" height="100px" />
               <figcaption><?php echo $row['name']; ?></figcaption>
+              <figcaption class="quantity"><?php echo $row['quantity'] ?></figcaption>
             </div>
         <?php }?>
         <hr class="divider">

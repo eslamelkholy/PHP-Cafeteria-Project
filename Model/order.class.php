@@ -84,12 +84,15 @@ class Order
         ");
         return ($result) ? true : false;
     }
-    //List Latest Five Orders
-    public static function getLatestOrders()
+    //Get Last Order
+    public static function getLastOrderData()
     {
         global $db;
-        $result = mysqli_query($db,"SELECT name FROM orders INNER JOIN users ON orders.user_id = users.id LIMIT 5");
-        return $result;
+        $myOrder = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = 1 ORDER BY id DESC LIMIT 1");
+        $myOrderData = mysqli_fetch_assoc($myOrder);
+        $orderId = $myOrderData['id'];
+        $result = mysqli_query($db,"SELECT * FROM order_products INNER JOIN products ON product_id = id HAVING order_id = '$orderId'");
+        return ($result) ? $result : false;
     }
 }
 ?>

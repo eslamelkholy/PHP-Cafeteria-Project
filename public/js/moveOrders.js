@@ -43,12 +43,8 @@ function showOrder(orderId,obj)
         $(".showOrder").text('+');
         $(".showOrder").removeClass('btn-danger');
         $(obj).toggleClass("btn-danger");
-        $(".orderImages").fadeIn();
-        $(".orderImages").fadeIn("slow");
-        $(".orderImages").fadeIn(3000);
-        $(".orderImages").show();
-        $(".orderImages").empty();
         $(obj).text('-');
+        $(".orderImages").fadeIn("slow").fadeIn(5000).show().empty();
         $.ajax({
             url:"http://localhost/CafeteriaProject/Controller/orderController.php",
             method:"post",
@@ -62,7 +58,7 @@ function showOrder(orderId,obj)
                         '<figcaption>'+product.name+'</figcaption>'+
                         '<figcaption>'+product.quantity+'</figcaption>'+
                     '</div>';
-                    $(".orderImages").append(html);
+                    $(".orderImages").append(html).fadeIn("slow").fadeIn(5000).show();
                 });
             },
             error:function(error){
@@ -73,11 +69,7 @@ function showOrder(orderId,obj)
     else
     {
         $(obj).text('+');
-        $(".orderImages").fadeOut();
-        $(".orderImages").fadeOut("slow");
-        $(".orderImages").fadeOut(3000);
-        $(".orderImages").empty();
-        $(".orderImages").hide();
         $(obj).toggleClass("btn-danger");
+        $(".orderImages").fadeOut("slow").fadeOut(6000).empty().hide();
     }
 }

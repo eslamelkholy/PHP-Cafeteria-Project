@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>My Orders</title>
@@ -27,8 +28,7 @@
             text-align: center;
             border: 2px solid black;
             width: 100%;
-            margin-top: 50px;
-            
+            margin-top: 50px;   
         }
         .images{
             margin-left: 40px;
