@@ -24,8 +24,14 @@
     <main class="add-user">
         <section class="main-padding">
           <div class="container">
-            <h1><u>Edit User</u></h1>
-            <form action="../Controller/userController.php" method="POST" class="form-horizontal text-info" >
+            <h1 class="alert bg-light text-center text-primary">Edit User</h1>
+            <form action="../Controller/userController.php" method="POST" class="form-horizontal text-info" enctype="multipart/form-data" >
+            <div class="form-group row">
+                <label for="" class="offset-sm-1 col-sm-2 control-label">ID</label>
+                <div class="col-sm-6">
+                  <input class="form-control" type="text" name="id" value = "<?php echo $userData['id'];?>" readonly/>
+                </div>
+              </div>
               <div class="form-group row">
                 <label for="" class="offset-sm-1 col-sm-2 control-label">Name</label>
                 <div class="col-sm-6">

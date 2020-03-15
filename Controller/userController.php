@@ -2,9 +2,9 @@
     require_once '..' . DIRECTORY_SEPARATOR . 'config.php';
     $user = new User();
     //var_dump($_POST);
-    //Edit
+    //Edit user data
     if(isset($_POST['update'])){
-        $user->setUserId(4); 
+        $user->setUserId($_POST['id']); 
         $user->setUserName($_POST['name']);
         $user->setUserEmail($_POST['email']);
         $user->setUserPassword($_POST['password']);
@@ -17,11 +17,14 @@
         }
 
     }
-    //Delete
+    //Delete user
     else if(isset($_GET['DeleteId'])){
        $result = $user->deleteUser($_GET['DeleteId']);
        if($result){
            header("Location: ../Views/allusers.php");
+       }
+       else{
+           echo "error";
        }
     }
 

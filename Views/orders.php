@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>My Orders</title>
+    <title>Orders</title>
     <link href="../public/css/bootstrap.css" rel="stylesheet" />
     <link href="../public/css/font-awesome.css" rel="stylesheet" />
 </head>
@@ -26,7 +26,8 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
+            <!-- ------------list orders------------ -->
             
             <?php  require_once '..' . DIRECTORY_SEPARATOR . 'config.php';
                 $order = new Order();
@@ -34,45 +35,50 @@
                 if($listOrder){
                     while($row = mysqli_fetch_assoc($listOrder)){
                         ?>
-                        
-                        <tr>
+                        <tr class="bg-dark text-light">
                         <th><?php echo $row['order_date']?></th>
-                        <td><?php echo $row['name']?></td>
-                        <td><?php echo $row['room_no']?></td>
-                        <td><?php echo $row['ext']?></td>
-                        <td><?php echo $row['status']?></td>
+                        <th><?php echo $row['name']?></th>
+                        <th><?php echo $row['room_no']?></th>
+                        <th><?php echo $row['ext']?></th>
+                        <th><?php echo $row['status']?></th>
                     </tr>
-                    
+            <!---------------- div Order ----------------->
+                    <tr>
+                         <td colspan=5 style="text-align: center;">       
+                            <div style="display: inline-block; padding: 10px;">
                     <?php
-                    
-                        $orderId = $order->setOrderId($row['id']);
+                        $orderId = $order->setOrderId($row['order_id']);
                         $orderDetailes = $order->listAllOrder_Related_Info($orderId);
                         if($orderDetailes){
-                            echo "ok";
-                            $detailes = mysqli_fetch_assoc($orderDetailes);
-                                ?>
-                                <div style="text-align: center;">
-                            <div style="display: inline-block; padding: 50px;">
-                            <img src="../public/Images/<?php echo $detailes['product_picture'] ?>" width="50px" height="50px" />
+                            while($detailes = mysqli_fetch_assoc($orderDetailes)){
+                    ?>
+                            <div style="display: inline-block; margin: 10px;">
+                            <img src="../public/Images/<?php echo $detailes['product_picture'] ?>" width="80px" height="80px" />
                             <span class="badge badge-pill badge-primary"><?php echo $detailes['price'] ?> EGP</span>
                             <figcaption><?php echo $detailes['name'] ?></figcaption>
                             <figcaption><?php echo $detailes['quantity'] ?></figcaption>
-                        </div>
+                            </div>
+                            <?php
+                            }
+                            ?>
+                            </div>
                         <div style="text-align:right; padding-right: 40px;">
                     <?php echo"
                         <h3>total: EGP {$row['amount']}</h3>";
                     ?>
-                    </div>
-                    </div>
+                        </div>
+                        </td>
+                        </tr>
+                        
                     <?php
                             
                         }
                     }
                  }
             ?>
-               
-               
-        <!-- ------------- div Order -------------  -->
+               </tbody>
+               </table>
+               </div>
         
     </div>
 

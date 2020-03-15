@@ -61,7 +61,10 @@ class Order
     //List User Orders ON Specified Data
     public function listDatedOrders($from,$to)
     {
-        
+        global $db;
+        $userId = mysqli_escape_string($db,$this->userId);
+        $result = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = '$userId' and order_date BETWEEN '$from' AND '$to'");
+        return ($result)? $result : false;
     }
     //List All Order Info And It's Related 
     public function listAllOrder_Related_Info()
@@ -91,7 +94,8 @@ class Order
 
     public function listOrderOfUser(){
         global $db;
-        $result = mysqli_query($db,"select * from users  inner join orders on users.id = orders.user_id");
+        $result = mysqli_query($db,"select orders.order_date, orders.status, orders.amount, orders.id as order_id, users.name, users.room_no, users.ext 
+        from users  inner join orders on users.id = orders.user_id");
         return $result;
     }
 

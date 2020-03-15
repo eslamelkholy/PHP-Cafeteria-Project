@@ -40,7 +40,7 @@
                     <tr>
                         <th>{$row['name']}</th>
                         <td>{$row['room_no']}</td>
-                        <td><img src='../public/Images/{$row['profile_picture']}' width='50px' height='50px' alt='Admin Picture'>
+                        <td><img src='../public/Images/{$row['profile_picture']}' width='80px' height='80px' alt='Admin Picture'>
                         </td>
                         <td>{$row['ext']}</td>
                         <td><a href='editUser.php?editId={$row['id']}' class='btn btn-success btn-sm'>Edit</a></td>

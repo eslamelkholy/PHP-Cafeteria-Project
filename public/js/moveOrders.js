@@ -34,12 +34,20 @@ function sumTotalPrice() {
     $('input[name="totalPrice"]').val(sum);
 }
 
-//Show Order Info
+//Show Specified Order Info
 function showOrder(orderId,obj)
 {   
-    $(obj).toggleClass("btn-danger");
+    
     if($(obj).text() == "+")
     {
+        $(".showOrder").text('+');
+        $(".showOrder").removeClass('btn-danger');
+        $(obj).toggleClass("btn-danger");
+        $(".orderImages").fadeIn();
+        $(".orderImages").fadeIn("slow");
+        $(".orderImages").fadeIn(3000);
+        $(".orderImages").show();
+        $(".orderImages").empty();
         $(obj).text('-');
         $.ajax({
             url:"http://localhost/CafeteriaProject/Controller/orderController.php",
@@ -65,7 +73,11 @@ function showOrder(orderId,obj)
     else
     {
         $(obj).text('+');
+        $(".orderImages").fadeOut();
+        $(".orderImages").fadeOut("slow");
+        $(".orderImages").fadeOut(3000);
         $(".orderImages").empty();
+        $(".orderImages").hide();
+        $(obj).toggleClass("btn-danger");
     }
-    
 }

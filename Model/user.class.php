@@ -85,7 +85,7 @@ class User
     public function deleteUser($deleteId){
         global $db;
         $result = mysqli_query($db,"delete from users where id ='$deleteId'");
-        return $result;
+        return ($result) ? true : false;
 
 
     }
