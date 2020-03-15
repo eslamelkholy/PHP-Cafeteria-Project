@@ -25,7 +25,7 @@
         <section class="main-padding">
           <div class="container">
             <h1 class="alert bg-light text-center text-primary">Edit User</h1>
-            <form action="../Controller/userController.php" method="POST" class="form-horizontal text-info" enctype="multipart/form-data" >
+            <form action="../Controller/userController.php" method="POST" class="form-horizontal text-info" >
             <div class="form-group row">
                 <label for="" class="offset-sm-1 col-sm-2 control-label">ID</label>
                 <div class="col-sm-6">
@@ -60,12 +60,6 @@
                 <label for="" class="offset-sm-1 col-sm-2 control-label">Ext.</label>
                 <div class="col-sm-6">
                   <input class="form-control" type="text" name="ext" placeholder="enter your Ext." value = "<?php echo $userData['ext'] ?>"/>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="" class="offset-sm-1 col-sm-2 control-label">Profile Picture</label>
-                <div class="col-sm-6">
-                  <input class="form-control-file" type="file" name="image"  placeholder="enter your Room No."/>
                 </div>
               </div>
               <div class="form-group text-center">
