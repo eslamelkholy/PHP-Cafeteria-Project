@@ -22,7 +22,7 @@
             if(in_array($imageType,$typeAllaw)){
             move_uploaded_file($dir_tmp,$imagePath);
            
-        $user->setUserPic($_POST['profileImg']);
+        $user->setUserPic($_POST['image']);
 
         if($user->updateUser()){
              header("Location: ../views/allusers.php");

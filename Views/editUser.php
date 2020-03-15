@@ -65,7 +65,7 @@
               <div class="form-group row">
                 <label for="" class="offset-sm-1 col-sm-2 control-label">Profile Picture</label>
                 <div class="col-sm-6">
-                  <input class="form-control-file" type="file" name="profileImg"  placeholder="enter your Room No."/>
+                  <input class="form-control-file" type="file" name="image"  placeholder="enter your Room No."/>
                 </div>
               </div>
               <div class="form-group text-center">
