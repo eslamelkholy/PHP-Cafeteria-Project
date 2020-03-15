@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../public/css/bootstrap.min.css" />
   <link type="text/css" rel="stylesheet" media="screen" href="../public/css/styles.css" />
   <title>Home</title>
+<<<<<<< HEAD
   <style>
     .btn-info {
       text-align: center;
@@ -17,6 +18,8 @@
 
     }
   </style>
+=======
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
 </head>
 
 <body>
@@ -30,10 +33,16 @@
         </form>
       </div>
     </section>
+    <h3 style="margin-left: 20px;font-size: 24px;color: #17a2b8">Click On The Products Below To Order Now..</h3>
     <div class="row" style="width: 100%;">
+<<<<<<< HEAD
 
       <section class=" col-4" style="margin-left: 20px">
         <div style=" border: 1px black solid;">
+=======
+      <section  class=" col-4" style="margin-left: 20px">
+        <div style="border:2px solid lightgray;border-radius: 5px;" >
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
           <h1 style="text-align:center;">Order</h1>
           <form action="../Controller/orderController.php" method="POST" class="form-horizontal text-info">
             <!-- Clicked Orders Section -->
@@ -81,6 +90,7 @@
         </div>
       </section>
 
+<<<<<<< HEAD
       <section class="offset-1 col-6" style="text-align: center; border: 1px black solid;">
         <h1>Latest Orders</h1>
         <!-- Latest Five Orders !!! -->
@@ -91,6 +101,23 @@
             <figcaption><?php echo $_SESSION['username']; ?></figcaption>
           </div>
         <?php } ?>
+=======
+      <section  class="offset-1 col-6" style="border:2px solid lightgray;border-radius: 5px;text-align: center">
+        <h1>Last Order</h1>
+        <!-- Last Orders !!! -->
+        <?php $result = Order::getLastOrderData();
+          if(!$result || mysqli_num_rows($result) > 0)
+          {
+            while ($row = mysqli_fetch_assoc($result)) { ?>
+            <div style="display: inline-block; margin: 10px;">
+              <img src="../public/Images/<?php echo $row['product_picture']; ?>" width="100px" height="100px" />
+              <figcaption><?php echo $row['name']; ?></figcaption>
+              <figcaption class="quantity"><?php echo $row['quantity'] ?></figcaption>
+            </div>
+        <?php }}else{ ?>
+              <h3>Make Your First Order Now !!</h3>
+       <?php } ?>
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
         <hr class="divider">
         <div style="display: inline-block; margin: 10px;">
           <?php

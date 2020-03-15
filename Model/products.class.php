@@ -39,10 +39,7 @@ class Products
         $result = mysqli_query($db,"SELECT * FROM products");
         return $result;
     }
-    public function editProduct()
-    {
-        
-    }
+    
     //Return Product Id
     public static function GetProductIdByName($productName)
     {
@@ -51,6 +48,20 @@ class Products
         $ProdId = mysqli_fetch_assoc($result)['id'];
         return $ProdId;
     }
+    #<===========================================================================>    
+    
+function deleteProduct()
+{
+        global $db;
+        if (isset($_GET['delete'])) {
+                $id = $_GET['delete'];
+                $query = "DELETE FROM products WHERE id=?";
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("i", $id); // i for integer
+                $stmt->execute();
+                header('location:allproducts.php');
+        }
+}
 }
 
 ?>

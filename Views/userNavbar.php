@@ -14,6 +14,7 @@
                 <form class="form-inline my-2 my-lg-0">
                     <div class="my-2 my-sm-0">
                         <img src="../public/Images/userAvatar.png" width="50" height="50" alt="userAvatar" />
+<<<<<<< HEAD
                         <span class="h4">
                             <?php
                             if ($_SESSION['isLogged']) {
@@ -23,6 +24,9 @@
                             }
                             ?>
                         </span>
+=======
+                        <span class="h4">Eslam</span>
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
                     </div>
                 </form>
                 <a href="../Controller/authentication.php" class="btn btn-warning;float:right">Logout</a>

@@ -34,3 +34,42 @@ function sumTotalPrice() {
     $('input[name="totalPrice"]').val(sum);
 }
 
+//Show Specified Order Info
+function showOrder(orderId,obj)
+{   
+    
+    if($(obj).text() == "+")
+    {
+        $(".showOrder").text('+');
+        $(".showOrder").removeClass('btn-danger');
+        $(obj).toggleClass("btn-danger");
+        $(obj).text('-');
+        $(".orderImages").fadeIn("slow").fadeIn(5000).show().empty();
+        $.ajax({
+            url:"http://localhost/CafeteriaProject/Controller/orderController.php",
+            method:"post",
+            dataType:"json",
+            data : {orderId : orderId},
+            success:function(allProduct){
+                $.each(allProduct,function(index,product){
+                    var html = '<div class="images">'+
+                        '<img src="../public/Images/'+product.product_picture+'">'+
+                        '<span class="badge badge-pill badge-primary">'+product.price+' EGP</span>'+
+                        '<figcaption>'+product.name+'</figcaption>'+
+                        '<figcaption>'+product.quantity+'</figcaption>'+
+                    '</div>';
+                    $(".orderImages").append(html).fadeIn("slow").fadeIn(5000).show();
+                });
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
+    }
+    else
+    {
+        $(obj).text('+');
+        $(obj).toggleClass("btn-danger");
+        $(".orderImages").fadeOut("slow").fadeOut(6000).empty().hide();
+    }
+}

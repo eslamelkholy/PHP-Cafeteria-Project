@@ -61,6 +61,21 @@ class Order
     //List User Orders ON Specified Data
     public function listDatedOrders($from, $to)
     {
+<<<<<<< HEAD
+=======
+        global $db;
+        $userId = mysqli_escape_string($db,$this->userId);
+        $result = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = '$userId' and order_date BETWEEN '$from' AND '$to'");
+        return ($result)? $result : false;
+    }
+    //List All Order Info And It's Related 
+    public function listAllOrder_Related_Info()
+    {
+        global $db;
+        $orderId = $this->id;
+        $result = mysqli_query($db,"SELECT * FROM order_products INNER JOIN products ON product_id = id HAVING order_id = '$orderId'");
+        return ($result) ? $result : false;
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
     }
     //Add Order To it's Related Product Table
     public static function addRelated_Order_Product($orderId, $productId, $quantity)
@@ -72,11 +87,19 @@ class Order
         ");
         return ($result) ? true : false;
     }
-    //List Latest Five Orders
-    public static function getLatestOrders()
+    //Get Last Order
+    public static function getLastOrderData()
     {
         global $db;
+<<<<<<< HEAD
         $result = mysqli_query($db, "select name FROM orders INNER JOIN users ON orders.user_id = users.id LIMIT 5");
         return $result;
+=======
+        $myOrder = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = 1 ORDER BY id DESC LIMIT 1");
+        $myOrderData = mysqli_fetch_assoc($myOrder);
+        $orderId = $myOrderData['id'];
+        $result = mysqli_query($db,"SELECT * FROM order_products INNER JOIN products ON product_id = id HAVING order_id = '$orderId'");
+        return ($result) ? $result : false;
+>>>>>>> ac387299dea30548979718ccc6a0d52f82283c53
     }
 }
