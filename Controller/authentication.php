@@ -27,6 +27,7 @@ else if (isset($_POST["login"])) {
     if ($loginUser) {
         session_start();
         $_SESSION['username'] = $loginUser['name'];
+        $_SESSION['userId'] = $loginUser['id'];
         $_SESSION['isLogged'] = true;
         if ($loginUser['admin'] == 1) {
             header("Location:../Views/adminhome.php");
