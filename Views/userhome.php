@@ -21,10 +21,10 @@
         </form>
       </div>
     </section>
+    <h3 style="margin-left: 20px;font-size: 24px;color: #17a2b8">Click On The Products Below To Order Now..</h3>
     <div class="row" style="width: 100%;">
-      
       <section  class=" col-4" style="margin-left: 20px">
-        <div style=" border: 1px black solid;" >
+        <div style="border:2px solid lightgray;border-radius: 5px;" >
           <h1 style="text-align:center;">Order</h1>
           <form action="../Controller/orderController.php" method="POST" class="form-horizontal text-info">
             <!-- Clicked Orders Section -->
@@ -73,7 +73,7 @@
         </div>
       </section>
 
-      <section  class="offset-1 col-6" style="text-align: center; border: 1px black solid;">
+      <section  class="offset-1 col-6" style="border:2px solid lightgray;border-radius: 5px;text-align: center">
         <h1>Last Order</h1>
         <!-- Last Orders !!! -->
         <?php $result = Order::getLastOrderData();
