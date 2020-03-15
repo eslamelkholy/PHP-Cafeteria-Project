@@ -1,9 +1,12 @@
+<?php
+require_once '..' . DIRECTORY_SEPARATOR . 'config.php';
+include '../Controller/Products.php' ?>
+
 <html>
 
 <head>
     <title>My Orders</title>
     <link href="../public/css/bootstrap.css" rel="stylesheet" />
-
     <link href="../public/css/font-awesome.css" rel="stylesheet" />
 </head>
 
@@ -33,23 +36,29 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
-                    <tr>
-                        <th>Tea</th>
-                        <td>5 EGP</td>
-                        <td><img src="../public/Images/tea.png" width="50px" height="50px" alt="Admin Picture">
-                        </td>
-                        <td><a href="#" class="btn btn-success btn-sm">Edit</a></td>
-                        <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
-                    </tr>
-                    <tr>
+                    <?php
+                    $product = new Products();
+                    $product->deleteProduct();
+                    $result = $product->listAllProducts();
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <tr>
+                            <th><?php echo $row['name']; ?></th>
+                            <td><?php echo $row['price']; ?> EGP</td>
+                            <td align="center">
+                            <?php echo"<img src='../uploads/{$row['product_picture'] }' style='width:50px;height:50px'; ";?></td>
+                            <td><a href="editProducts_form.php?id=<?php echo $row["id"] ?>" class="btn btn-success btn-sm">Edit</a></td>
+                            <td><a href="allproducts.php?delete=<?= $row['id']; ?>" class="btn btn-danger btn-sm">Delete</a></td>
+                        </tr>
+                    <?php } ?>
+                    <!-- <tr>
                         <th>Nescafe</th>
                         <td>15 EGP</td>
                         <td><img src="../public/Images/nescafe.jpg" width="50px" height="50px" alt="Admin Picture">
                         </td>
                         <td><a href="#" class="btn btn-success btn-sm">Edit</a></td>
                         <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
-                    </tr>
-                    <tr>
+                    </tr> -->
+                    <!-- <tr>
                         <th>Coffee</th>
                         <td>10 EGP</td>
                         <td><img src="../public/Images/coffee.jpg" width="50px" height="50px" alt="Admin Picture">
@@ -64,10 +73,10 @@
                         </td>
                         <td><a href="#" class="btn btn-success btn-sm">Edit</a></td>
                         <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
-            <a href="#" class="btn btn-success btn-lg col-12">Add Product</a>
+            <a href="addProduct.php" class="btn btn-success btn-lg col-12">Add Product</a>
         </div>
 
     </div>

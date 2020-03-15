@@ -9,6 +9,7 @@ define('APP_PATH', dirname(realpath(__FILE__)));
 define('MODELS_PATH', APP_PATH . DS . 'Model');
 define('VIEWS_PATH', APP_PATH . DS . 'Views');
 define('CONTROLLERS_PATH', APP_PATH . DS . 'Controller');
+define('PHPMAILER_PATH', APP_PATH . DS . 'PHPMailer');
 define('LIB_PATH', APP_PATH . DS . 'public');
 
 // Database Connection

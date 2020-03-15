@@ -106,43 +106,13 @@ table th, td {
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-danger bg-light">
-            <div class="container">
-                <h2 class="text-info">Cafeteria |</h2>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Manual Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Checks</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <div class="my-2 my-sm-0">
-                            <img src="../assets/img/userAvatar.png" width="50" height="50" alt="userAvatar" />
-                            <span class="h4">  Admin</span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </nav>
-    </header>
+<?php include './adminNavbar.php' ?>
+
     <main class="checks">
         <section class="main-padding">
             <div class="container">
-                <h1><u>Checks</u></h1>
-                <form action="http://localhost/Cafeteria-Project/Views/Checks.php" method="POST">
+                <h1 class="alert bg-light text-center text-primary">Checks</h1>
+                <form action="Checks.php" method="POST">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
