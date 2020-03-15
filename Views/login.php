@@ -1,3 +1,53 @@
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+
+require_once "functions.php";
+
+if (isset($_POST['email'])) {
+	$conn = new mysqli('localhost', 'root', '', 'cafeteria');
+
+	$email = $conn->real_escape_string($_POST['email']);
+
+	$sql = $conn->query("select id FROM users WHERE email='$email'");
+	if ($sql->num_rows > 0) {
+
+		$token = generateNewString();
+
+		$conn->query("update users SET token='$token', 
+                    tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE)
+                    WHERE email='$email'
+            ");
+
+		require_once "PHPMailer/PHPMailer.php";
+		require_once "PHPMailer/Exception.php";
+
+		$mail = new PHPMailer();
+		$mail->addAddress($email);
+		$mail->setFrom("https://github.com/eslamelkholy/PHP-Cafeteria-Project", "Github");
+		$mail->Subject = "Reset Password";
+		$mail->isHTML(true);
+		$mail->Body = "
+            Hi,<br><br>
+            
+            In order to reset your password, please click on the link below:<br>
+            <a href='
+            http://localhost/CafeteriaProject/Views/resetPassword.php?email=$email&token=$token
+            '>http://localhost/CafeteriaProject/Views/resetPassword.php?email=$email&token=$token</a><br><br>
+            
+            Kind Regards,<br>
+            Salah
+            ";
+
+		if ($mail->send())
+			exit(json_encode(array("status" => 0, "msg" => 'Please Check Your Email Inbox!')));
+		else {
+			exit(json_encode(array("status" => 1, "msg" => 'Something Wrong Just Happened! Please try again!')));
+		}
+	} else
+		exit(json_encode(array("status" => 0, "msg" => 'Please Check Your Inputs!')));
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,18 +92,18 @@
 				<!------------ Login Form ----------------->
 				<form class="login100-form validate-form flex-sb flex-w" action="../Controller/authentication.php" method="POST">
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
-						<input class="input100" type="text" name="username" placeholder="Username">
+						<input class="input100" type="text" id="username" name="username" placeholder="Username">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Email is required">
-						<input class="input100" type="email" name="email" placeholder="Email">
+						<input class="input100" type="email" id="email" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 					</div>
 
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
-						<input class="input100" type="password" name="password" placeholder="Password">
+						<input class="input100" type="password" id="password" name="password" placeholder="Password">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -68,7 +118,9 @@
 				<br />
 				<!------------- Forget Password ---------------->
 				<h5 class="loginhere" style="text-align: center;">
-					<a href="addUser.php" class="loginhere-link">Forget Password?</a>
+					<input type="button" class="btn btn-primary" value="Forgot Password" style="cursor: pointer" />
+					<br><br>
+					<h6 id="response"></h6>
 				</h5>
 			</div>
 		</div>
@@ -93,6 +145,32 @@
 	<script src="../public/login/vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="../public/login/js/main.js"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		var email = $("#email");
+		$(document).ready(function() {
+			$('.btn-primary').on('click', function() {
+				if (email.val() != "") {
+					email.css('border', '1px solid green');
+					$.ajax({
+						url: 'login.php',
+						method: 'POST',
+						dataType: 'json',
+						data: {
+							email: email.val()
+						},
+						success: function(response) {
+							if (!response.success)
+								$("#response").html(response.msg).css('color', "red");
+							else
+								$("#response").html(response.msg).css('color', "green");
+						}
+					});
+				} else
+					email.css('border', '1px solid red');
+			});
+		});
+	</script>
 
 </body>
 
