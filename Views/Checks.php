@@ -10,14 +10,37 @@
       $result2=mysqli_query($db,$query2);
     }
     if(isset($_POST['filter'])){
-      if($_POST['users']=="All"){
-          $query2="select users.id as id,name,SUM(amount) as amount from users left join orders on users.id=orders.user_id GROUP BY name";
+           if($_POST['users']=="All" and !empty($_POST['start_date']) and !empty($_POST['end_date'])){
+          $start_date=date("Y-m-d H:i:s",strtotime(str_replace('/','-',$_POST['start_date'])));
+          $end_date=date("Y-m-d H:i:s",strtotime(str_replace('/','-',$_POST['end_date'])));
+          $query2="select users.id as id,name,SUM(amount) as amount from users left join orders on users.id=orders.user_id where order_date between {$start_date} and {$end_date} GROUP BY name";
           $result2=mysqli_query($db,$query2);
       }
-      else{
-          $query2="select users.id as id,name,SUM(amount) as amount from users left join orders on users.id=orders.user_id  where users.id={$_POST['users']}";
+      elseif($_POST['users']=="All" and !empty($_POST['start_date'])){
+        $start_date=date("Y-m-d H:i:s",strtotime(str_replace('/','-',$_POST['start_date'])));
+        $query2="select users.id as id,name,SUM(amount) as amount from users left join orders on users.id=orders.user_id where order_date between {$start_date} and curdate() GROUP BY name";
+        $result2=mysqli_query($db,$query2);
+      }
+      elseif($_POST['users']=="All"){
+        $query2="select users.id as id,name,SUM(amount) as amount from users left join orders on users.id=orders.user_id";
           $result2=mysqli_query($db,$query2);
       }
+      elseif($_POST['users']!="All" and !empty($_POST['start_date']) and !empty($_POST['end_date'])){
+          $start_date=date("Y-m-d H:i:s",strtotime(str_replace('/','-',$_POST['start_date'])));
+          $end_date=date("Y-m-d H:i:s",strtotime(str_replace('/','-',$_POST['end_date'])));
+          $query2="select users.id as id,name,SUM(amount) as amount from users left join orders on users.id=orders.user_id  where users.id={$_POST['users']} and order_date between {$start_date} and {$end_date}";
+          $result2=mysqli_query($db,$query2);
+      }
+      elseif($_POST['users']!="All" and !empty($_POST['start_date'])){
+        $start_date=date("Y-m-d H:i:s",strtotime(str_replace('/','-',$_POST['start_date'])));
+        $query2="select users.id as id,name,SUM(amount) as amount from users left join orders on users.id=orders.user_id  where users.id={$_POST['users']} and order_date between {$start_date} and curdate()";
+        $result2=mysqli_query($db,$query2);
+      }
+      elseif($_POST['users']!="All"){
+        $query2="select users.id as id,name,SUM(amount) as amount from users left join orders on users.id=orders.user_id  where users.id={$_POST['users']}";
+        $result2=mysqli_query($db,$query2);
+      }
+
     }  
 ?>
 <!DOCTYPE html>
@@ -124,13 +147,13 @@ table th, td {
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="start">Start date:</label>
-                                <input type="date" class="form-control start" name="start_date" />
+                                <input type="date" id="date" class="form-control start" name="start_date" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="end">End Date:</label>
-                                <input type="date" class="form-control end" name="end_date" />
+                                <input type="date" id="date" class="form-control end" name="end_date" />
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -183,7 +206,7 @@ table th, td {
           //   <td>{$result_array3['amount']}</td>
           // </tr>";}
           echo "
-          <tr id='hidden'>
+          <tr>
             <td></td>
             <td colspan=2>
               <table id='products'>
