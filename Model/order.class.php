@@ -85,14 +85,19 @@ class Order
         return ($result) ? true : false;
     }
     //Get Last Order
-    public static function getLastOrderData()
+    public static function getLastOrderData($userId)
     {
         global $db;
-        $myOrder = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = 1 ORDER BY id DESC LIMIT 1");
-        $myOrderData = mysqli_fetch_assoc($myOrder);
-        $orderId = $myOrderData['id'];
-        $result = mysqli_query($db,"SELECT * FROM order_products INNER JOIN products ON product_id = id HAVING order_id = '$orderId'");
-        return ($result) ? $result : false;
+        $myOrder = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = '$userId' ORDER BY id DESC LIMIT 1");
+        if (mysqli_num_rows($myOrder) > 0)
+        {
+            $myOrderData = mysqli_fetch_assoc($myOrder);
+            $orderId = $myOrderData['id'];
+            $result = mysqli_query($db,"SELECT * FROM order_products INNER JOIN products ON product_id = id HAVING order_id = '$orderId'");
+            return ($result) ? $result : false;
+        }
+        else
+            return false;
     }
 
     public function listOrderOfUser(){

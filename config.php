@@ -12,7 +12,7 @@ define('CONTROLLERS_PATH', APP_PATH . DS . 'Controller');
 define('LIB_PATH', APP_PATH . DS . 'public');
 
 // Database Connection
-$db = mysqli_connect("localhost","root","mariam@2468","cafeteria");
+$db = mysqli_connect("localhost","root","","cafeteria");
 $path = get_include_path().PS.LIB_PATH;
 set_include_path($path);
 

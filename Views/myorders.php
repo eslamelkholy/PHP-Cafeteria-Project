@@ -41,7 +41,7 @@
                 //List Order within Days
                 if(isset($_POST["showOrders"])){
                     $userSelectedOrder = new Order();
-                    $userSelectedOrder->setUserId(1);
+                    $userSelectedOrder->setUserId($_SESSION['userId']);
                     $result = $userSelectedOrder->listDatedOrders($_POST["from"],$_POST["to"]);
                     if(!$result || intval(mysqli_num_rows($result)) == 0){ ?>
                         <tr><td colspan="4" class="text-center" style="font-weight: bold">There is No Order Between This Date</td></tr>
@@ -71,7 +71,7 @@
                 <?php }
                 else{ 
                     $userOrder = new Order();
-                    $userOrder->setUserId(1);
+                    $userOrder->setUserId($_SESSION['userId']);
                     $result = $userOrder->listOrders();
                     while ($row = mysqli_fetch_assoc($result)) { ?>
                         <tr>

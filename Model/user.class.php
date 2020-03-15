@@ -172,7 +172,7 @@ class User
     {
         // global $db;
 
-        $db = mysqli_connect("localhost", "root", "mariam@2468", "cafeteria");
+        $db = mysqli_connect("localhost", "root", "", "cafeteria");
         $errorArray = [];
         // ------ If Conn Failed ----------
         if ($db->connect_errno) {

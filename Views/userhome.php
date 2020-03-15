@@ -66,8 +66,8 @@
       <section  class="offset-1 col-6" style="border:2px solid lightgray;border-radius: 5px;text-align: center">
         <h1>Last Order</h1>
         <!-- Last Orders !!! -->
-        <?php $result = Order::getLastOrderData();
-          if(!$result || mysqli_num_rows($result) > 0)
+        <?php $result = Order::getLastOrderData((int)$_SESSION['userId']);
+          if($result)
           {
             while ($row = mysqli_fetch_assoc($result)) { ?>
             <div style="display: inline-block; margin: 10px;">

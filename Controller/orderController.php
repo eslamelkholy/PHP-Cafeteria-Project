@@ -5,7 +5,7 @@
         $newOrder = new Order();
         $newOrder->setTotalPrice($_POST["totalPrice"]);
         $newOrder->setOrderNotes($_POST["Notes"]);
-        $newOrder->setUserId(1);
+        $newOrder->setUserId($_SESSION['userId']);
         $newOrder->setRoomNumber($_POST['room_no']);
         $orderId =  $newOrder->addOrder();
         //Getting All Products And Compare it to Current Order if exist Inser it
