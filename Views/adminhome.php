@@ -1,4 +1,24 @@
-<?php require_once '..' . DIRECTORY_SEPARATOR . 'config.php'; ?>
+<?php
+require_once '..' . DIRECTORY_SEPARATOR . 'config.php';
+$orders = [];
+$result3 = $db->query("select * from orders");
+while ($row = mysqli_fetch_assoc($result3)) {
+  $orders[] = $row;
+}
+$users = [];
+global $db;
+$result = $db->query("select * from users");
+while ($row = mysqli_fetch_assoc($result)) {
+  $users[$row['id']] = $row['name'];
+}
+$products = [];
+$result2 = $db->query("select * from products");
+while ($row = mysqli_fetch_assoc($result2)) {
+  $products[] = $row;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,59 +43,40 @@
       </div>
     </section>
     <div class="row">
-      
-      <section  class="col-4">
-        <div class="container"
-          style=" text-align: left; border: 1px black solid; width: 500px; margin-left:10px">
+      <section class="col-4">
+        <div class="container" style=" text-align: left; border: 1px black solid; width: 500px; margin-left:10px">
           <h1 style="text-align:center;">Order</h1>
-          <form action="#" method="POST" class="form-horizontal text-info">
+          <form action="add_order.php" method="POST" class="form-horizontal text-info">
             <div class="form-group row">
-              <label for="" class="offset-sm-1 col-sm-2 control-label">Tea</label>
               <div class="col-sm-6">
-                <input class="form-control" type="number" placeholder="0" value="2" min="0" max="10"
-                  style="width: 100px;" />
+
+
+                <input class="form-control" type="number" placeholder="0" value="2" min="0" max="10" style="width: 100px;" />
                 <div style="text-align: right;">
-                  <span id="total"class="col-2" >EGP 45</span>
+                  <span id="total" class="col-2"> EGP</span>
                   <span id="cancel">X</span>
                 </div>
 
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="" class="offset-sm-1 col-sm-2 control-label">Cafee</label>
-              <div class="col-sm-6">
-                <input class="form-control" type="number" placeholder="0" value="" min="0" max="10"
-                  style="width: 100px;" />
-                <div style="text-align: right;">
-                  <span id="total" class="col-2">EGP 0 </span>
-                  <span id="cancel">X</span>
-                </div>
               </div>
             </div>
 
             <div class="form-group row">
               <label for="" class="offset-sm-1 col-sm-2 control-label">Notes</label>
               <div class="col-sm-6">
-                <input class="form-control" type="text" placeholder="Enter your notes about the order"
-                  style="width: 300px; height: 100px;" />
+                <input class="form-control" type="text" placeholder="Enter your notes about the order" style="width: 300px; height: 100px;" />
               </div>
             </div>
             <div class="form-group row">
               <label for="" class="offset-sm-1 col-sm-2 control-label">Room</label>
               <div class="col-sm-6">
                 <select>
-                  <option value="2006">2006</option>
-                  <option value="2005">2005</option>
+                  
+                  <option value="2006"><?php echo $row['room_no'] ?></option>
                 </select>
               </div>
             </div>
 
-            <hr class="divider" >
-
-            <div style="text-align:right;">
-              <h3>EGP 45 </h3>
-            </div>
-            <br />
+            <hr class="divider">
             <div class="form-group text-center">
               <button class="btn btn-success" type="submit">Confirm</button>
             </div>
@@ -83,56 +84,23 @@
         </div>
       </section>
 
-      <section  class="offset-1 col-6" style="text-align: center; border: 1px black solid;">
+      <section class="offset-1 col-6" style="text-align: center; border: 1px black solid;">
         <h3>Add to user</h3>
         <select>
-          <option value="1">Ahemd</option>
-          <option value="2">Mohamed</option>
+          <?php
+          foreach ($users as $id => $name) {
+            echo  "<option value={$id}>{$name}</option>";
+          }
+          ?>
         </select>
-        
+
         <hr class="divider">
         <div style="display: inline-block; margin: 10px;">
-          <div style="display: inline-block; margin: 10px;">
-            <img src="../public/Images/tea.png" width="100px" height="100px"  />
-            <figcaption>Tea</figcaption>
-          </div>
-          <div style="display: inline-block; margin: 10px;">
-            <img src="../public/Images/coffee.jpg" width="100px" height="100px" />
-            <figcaption>caffee</figcaption>
-          </div>
-          <div style="display: inline-block; margin: 10px;">
-            <img src="../public/Images/nescafe.jpg" width="100px" height="100px"  />
-            <figcaption>nescafe</figcaption>
-          </div>
-          <div style="display: inline-block; margin: 10px;">
-            <img src="../public/Images/tea.png" width="100px" height="100px"  />
-            <figcaption>Tea</figcaption>
-          </div>
-          <div style="display: inline-block; margin: 10px;">
-            <img src="../public/Images/nescafe.jpg" width="100px" height="100px"  />
-            <figcaption>nescafe</figcaption>
-          </div>
-          <div style="display: inline-block; margin: 10px;">
-            <img src="../public/Images/nescafe.jpg" width="100px" height="100px"  />
-            <span class="badge badge-pill badge-primary">15 EGP</span>
-            <figcaption>nescafe</figcaption>
-          </div>
-          <div style="display: inline-block; margin: 10px;">
-            <img src="../public/Images/coffee.jpg" width="100px" height="100px" />
-            <span class="badge badge-pill badge-primary">10 EGP</span>
-            <figcaption>caffee</figcaption>
-          </div>
-          <div style="display: inline-block; margin: 10px;">
-            <img src="../public/Images/tea.png" width="100px" height="100px"  />
-            <span class="badge badge-pill badge-primary">5 EGP</span>
-            <figcaption>Tea</figcaption>
-          </div>
-          <div style="display: inline-block; margin: 10px;">
-            <img src="../public/Images/icecream.jpg" width="100px" height="100px"  />
-            <span class="badge badge-pill badge-primary">20 EGP</span>
-            <figcaption>IceCream</figcaption>
-          </div>
-         
+          <?php
+          foreach ($products as $item) {
+            echo "<img class='menuItem' src='../uploads/{$item['product_image']}' data-id='{$item['id']}' data-price='{$item['product_price']}' data-name='{$item['product_name']}'/>";
+          }
+          ?>
         </div>
 
       </section>
