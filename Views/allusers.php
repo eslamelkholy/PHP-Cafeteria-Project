@@ -67,7 +67,7 @@
                     </tr>
                 </tbody>
             </table>
-            <a href="#" class="btn btn-success btn-lg col-12">Add User</a>
+            <a href="addUser.php" class="btn btn-success btn-lg col-12">Add User</a>
         </div>
 
     </div>

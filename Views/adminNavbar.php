@@ -24,9 +24,18 @@
                 <form class="form-inline my-2 my-lg-0">
                     <div class="my-2 my-sm-0">
                         <img src="../public/Images/userAvatar.png" width="50" height="50" alt="userAvatar" />
-                        <span class="h4">Admin</span>
+                        <span class="h4">
+                            <?php
+                            if ($_SESSION['isLogged']) {
+                                echo $_SESSION['username'];
+                            } else {
+                                header("Location:login.php");
+                            }
+                            ?>
+                        </span>
                     </div>
                 </form>
+                <a href="../Controller/authentication.php" class="btn btn-warning;float:right">Logout</a>
             </div>
         </div>
     </nav>

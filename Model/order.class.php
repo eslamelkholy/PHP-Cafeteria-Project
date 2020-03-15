@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Order
 {
@@ -37,16 +37,16 @@ class Order
     public function addOrder()
     {
         global $db;
-        $notes = mysqli_escape_string($db,$this->notes);
-        $totalPrice = mysqli_escape_string($db,$this->totalPrice);
-        $room_no = mysqli_escape_string($db,$this->room_no);
-        $userId = mysqli_escape_string($db,$this->userId);
-        $result = mysqli_query($db,"INSERT INTO orders SET `notes` = '$notes' ,
+        $notes = mysqli_escape_string($db, $this->notes);
+        $totalPrice = mysqli_escape_string($db, $this->totalPrice);
+        $room_no = mysqli_escape_string($db, $this->room_no);
+        $userId = mysqli_escape_string($db, $this->userId);
+        $result = mysqli_query($db, "INSERT INTO orders SET `notes` = '$notes' ,
             order_date = now(),
             `status` = 1 ,
-             `amount` = '$totalPrice',
-             `room` = '$room_no',
-             `user_id` = '$userId'
+            `amount` = '$totalPrice',
+            `room` = '$room_no',
+            `user_id` = '$userId'
         ");
         return mysqli_insert_id($db);
     }
@@ -54,20 +54,19 @@ class Order
     public function listOrders()
     {
         global $db;
-        $userId = mysqli_escape_string($db,$this->userId);
-        $result = mysqli_query($db,"SELECT * FROM orders WHERE `user_id` = '$userId'");
-        return ($result)? $result : false;
+        $userId = mysqli_escape_string($db, $this->userId);
+        $result = mysqli_query($db, "SELECT * FROM orders WHERE `user_id` = '$userId'");
+        return ($result) ? $result : false;
     }
     //List User Orders ON Specified Data
-    public function listDatedOrders($from,$to)
+    public function listDatedOrders($from, $to)
     {
-        
     }
     //Add Order To it's Related Product Table
-    public static function addRelated_Order_Product($orderId,$productId,$quantity)
+    public static function addRelated_Order_Product($orderId, $productId, $quantity)
     {
         global $db;
-        $result = mysqli_query($db,"INSERT INTO order_products SET order_id = '$orderId' ,
+        $result = mysqli_query($db, "INSERT INTO order_products SET order_id = '$orderId' ,
             product_id = '$productId',
             quantity = '$quantity'
         ");
@@ -77,8 +76,7 @@ class Order
     public static function getLatestOrders()
     {
         global $db;
-        $result = mysqli_query($db,"SELECT name FROM orders INNER JOIN users ON orders.user_id = users.id LIMIT 5");
+        $result = mysqli_query($db, "select name FROM orders INNER JOIN users ON orders.user_id = users.id LIMIT 5");
         return $result;
     }
 }
-?>
