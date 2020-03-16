@@ -160,7 +160,8 @@ class User
             password = '$password',
             room_no = '$roomNo',
             ext = '$ext',
-            profile_picture = 'admin.png'
+            profile_picture = 'user.jpg',
+            admin = '0' 
             ");
         if ($result) {
             header("Location:../Views/login.php");

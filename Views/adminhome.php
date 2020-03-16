@@ -98,7 +98,7 @@ while ($row = mysqli_fetch_assoc($result2)) {
         <div style="display: inline-block; margin: 10px;">
           <?php
           foreach ($products as $item) {
-            echo "<img class='menuItem' src='../uploads/{$item['product_image']}' data-id='{$item['id']}' data-price='{$item['product_price']}' data-name='{$item['product_name']}'/>";
+            echo "<img class='menuItem' src='../uploads/{$item['product_picture']}' data-id='{$item['id']}' data-price='{$item['price']}' data-name='{$item['name']}'/>";
           }
           ?>
         </div>

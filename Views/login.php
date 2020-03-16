@@ -23,8 +23,8 @@ if (isset($_POST['email'])) {
 		require_once "PHPMailer/Exception.php";
 
 		$mail = new PHPMailer();
-		$mail->addAddress($email);
 		$mail->setFrom("https://github.com/eslamelkholy/PHP-Cafeteria-Project", "Github");
+		$mail->addAddress($email);
 		$mail->Subject = "Reset Password";
 		$mail->isHTML(true);
 		$mail->Body = "
@@ -40,9 +40,9 @@ if (isset($_POST['email'])) {
             ";
 
 		if ($mail->send())
-			exit(json_encode(array("status" => 0, "msg" => 'Please Check Your Email Inbox!')));
+			exit(json_encode(array("status" => 1, "msg" => 'Please Check Your Email Inbox!')));
 		else {
-			exit(json_encode(array("status" => 1, "msg" => 'Something Wrong Just Happened! Please try again!')));
+			exit(json_encode(array("status" => 0, "msg" => 'Something Wrong Just Happened! Please try again!')));
 		}
 	} else
 		exit(json_encode(array("status" => 0, "msg" => 'Please Check Your Inputs!')));
